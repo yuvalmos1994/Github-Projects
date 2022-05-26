@@ -67,7 +67,7 @@ public class Maze extends JFrame {
             boolean result = false;
             switch (this.algorithm) {
                 case Definitions.ALGORITHM_DFS:
-                   result= dfsPath(values,0,0);
+                   result= dfsPath(values,this.startRow,this.startColumn);
                     break;
                 case Definitions.ALGORITHM_BFS:
                     break;
@@ -107,11 +107,10 @@ public class Maze extends JFrame {
             {
                 returnValue = dfsPath(maze,x,y-1);
             }
-            setSquareAsVisited(x,y,false);
-            if(returnValue)
-            {
-                setSquareAsVisited(x,y,true);
-            }
+            if(!returnValue)
+                setSquareAsVisited(x,y,false);
+            else
+                 this.visited[x][y] = true;
             return returnValue;
         }
         return false;
